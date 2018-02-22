@@ -3,8 +3,11 @@ package com.dragonmaster10.musicAndLifeProgram;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
- * @author: dragonmaster10
+ * Name: dragonmaster10
  * Date: 22/02/2018
  *
  */
@@ -18,15 +21,23 @@ public class App
     	
     	//to instantiate App class based in the parameters entered at the commandline 
     	actionCommandlineInput(args);
+    }
     	
     	//DATA
     	//define attributes
     	private Scanner someInput;
     	private Date today;
+    	private static Logger LOG;
     	
     	//Constructors
     	public App()
     	{
+    		//associate logging with this class so know the messages that came from objects of this class
+    		LOG = LogManager.getLogger(App.class);
+    		
+    		//test the logging
+    		testLogOutput();
+    		
     		this.someInput = new Scanner(System.in);
     		
     		//do something here
@@ -63,11 +74,25 @@ public class App
     		else
     		{
     			//display the command line entered
-    			for(int i=0; i<args.lengthh; i++)
+    			for(int i=0; i<args.length; i++)
     			{
     				System.out.println(args[i]);
     			}
     		}
-    	}
-    	}
+    	}//EOM
+    	
+    	//Test the log4j2 logging
+    	
+    	private static void testLogOutput()
+    	{
+    		LOG.debug("Log test: Test printed on debug");
+    		LOG.info("Log test: Test printed on info");
+    		LOG.warn("Log test: Test printed on warn");
+    		LOG.error("Log test: Test printed on error");
+    		LOG.fatal("Log test: Test printed on fatal");
+    		
+    		LOG.info("Appending string: {}.", "Application log test message -Hi");
+    		
+    	}//EOM
+    	
 }//EOC
