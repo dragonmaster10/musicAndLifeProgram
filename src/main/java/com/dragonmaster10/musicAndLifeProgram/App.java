@@ -54,9 +54,9 @@ public class App
     	* View the arguments presented at the commandline
     	* This is for debug and demo purposes
     	*/
-    	private static void seeCommandlineInput(String args[])
+    	private static void seeCommandlineInput( String args[])
     	{
-    		if(args.length ==0)
+    		if(args.length == 0)
     		{
     			System.out.println("There were no commandline arguments passed!");
     		}
