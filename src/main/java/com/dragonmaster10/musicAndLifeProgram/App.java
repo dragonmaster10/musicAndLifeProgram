@@ -15,6 +15,12 @@ import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /*
  * Name: dragonmaster10
  * Date: 22/02/2018
@@ -37,6 +43,11 @@ public class App
     	private Scanner someInput;
     	private Date today;
     	private static Logger LOG;
+    	private static String VERSION = "0.4";
+    	
+    	//The URL and name of the SQLite database
+   	    //TODO:	Remove database	location and name hard coding and pass in as a parameter in	the	next version
+    	private String databaseFile = "jdbc:sqlite:database/oreallyoreilly.db";
     	
     	//Constructors
     	public App(Level logLevel)
@@ -50,15 +61,16 @@ public class App
     		LOG.info("Application started with log level debug:" + LOG.isDebugEnabled());
     		
     		//test the logging
-    		testLogOutput();
+    		//testLogOutput();
     		
     		this.someInput = new Scanner(System.in);
     		
-    		//do something here
-    		System.out.println(" \n Soon ... stuff will happen here");
+    		//do something here :Display the list of users from the database
+    		showListOfUsers();
+    		//System.out.println(" \n Soon ... stuff will happen here");
     		
     		//pause before exit (this is only useful if an error occurs)
-    		System.out.println(" \n Press enter to ecit the program");
+    		System.out.println(" \n Press enter to exit the program");
     		this.someInput.nextLine();
     		
     		//close the program without error
@@ -99,7 +111,7 @@ public class App
     			
     			if (options.has("version"))
     			{
-    				System.out.println("music and life program version 0.3");
+    				System.out.println("music and life program: " + VERSION);
     				System.exit(0);
     			}
     			
@@ -123,6 +135,57 @@ public class App
     		}
     		
     	}// EOM
+    	
+    	//write out the users in a users table for the database specified
+    	private void showListOfUsers()
+    	{
+    		this.today = new Date();
+    		LOG.debug("Getting list of Users from Database as of " + today);
+    		
+    		//if log level id debug e.g. -v parameter used then show database file being used
+    		LOG.debug("Database file:" +this.databaseFile);
+    		
+    		//Get JDBC connection to database
+    		Connection connection = null;
+    		
+    	try
+    	{
+    		//creater a database connection
+    		connection = DriverManager.getConnection(this.databaseFile);
+    		
+    		Statement statement = connection.createStatement();
+    		statement.setQueryTimeout(30); // set timeout to 30 sec.
+    		
+    		//Run the query
+    		ResultSet resultSet = statement.executeQuery("select * from user");
+    		
+    		//iterate through the results create User objects put in the ListArray
+    		while(resultSet.next())
+    		{
+    			LOG.debug("User found: " + resultSet.getString("userName"));
+    		}
+    	}
+    	catch(SQLException e)
+    	{
+    		//if the error message is "out of memory", it probably means no database file is found
+    		LOG.error(e.getMessage());
+    	}
+    	finally
+    	{
+    		try
+    		{
+    			if(connection != null)
+    				connection.close();
+    		}
+    		catch(SQLException e)
+    		{
+    			//connection close failed.
+    			LOG.error(e.getMessage());
+    		}
+    	}
+    	
+    	}//EOM
+    	
     	
     	/*
     	* View the arguments presented at the commandline
