@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
+import com.dragonmaster10.musicAndLifeProgram.menu.MenuBuilder;
+
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -68,6 +70,13 @@ public class App
     		//do something here :Display the list of users from the database
     		showListOfUsers();
     		//System.out.println(" \n Soon ... stuff will happen here");
+    		
+    		
+    		MenuBuilder theMenu = new MenuBuilder();
+    		//theMenu.print();
+    		//LOG.debug(theMenu.display());
+    		theMenu.getMenu().display();
+    		
     		
     		//pause before exit (this is only useful if an error occurs)
     		System.out.println(" \n Press enter to exit the program");
