@@ -26,16 +26,21 @@ public class Menu extends MenuWidget
 	int selection;
 	
 	Scanner input = new Scanner(System.in);
+	
+	//generic object factory
 	Factory f = Factory.getFactory();
 	
-	//CONSTRUCTORS
+	//Factory method pattern version
+	MenuItemFactory executorFactory = new MenuItemFactory();
+	
+	//CONSTRUCTORS-------------------------------------------------
 	public Menu(String name, String description)
 	{
 		this.name = name;
 		this.description = description;
 	}
 	
-	//METHODS
+	//METHODS-------------------------------------------------------
 	public void add(MenuWidget menuWidget)
 	{
 		this.menu.add(menuWidget);
@@ -75,6 +80,7 @@ public class Menu extends MenuWidget
 			while (iterator.hasNext())
 			{
 				MenuWidget menuWidget = (MenuWidget)iterator.next();
+				
 				if(Menu.class.isInstance(menuWidget))
 				{
 					System.out.println(menuWidget.getDisplayName());
@@ -106,16 +112,7 @@ public class Menu extends MenuWidget
 				else
 				{
 					ConsoleControls.clearConsole();
-					try
-					{
-						Object obj = f.getObject(menuOfExecutors.get(this.selection));
-						exe = (IExecutable) obj;
-						exe.execute();
-					}
-					catch(FactoryException fe)
-					{
-						System.out.println(ConsoleControls.ANSI_RED + "Failed to create instance: " + menuOfExecutors.get(this.selection) + ConsoleControls.ANSI_RESET);
-					}					
+					executorFactory.getMenuItem(menuOfExecutors.get(this.selection)).execute();
 				}
 			}
 			else
