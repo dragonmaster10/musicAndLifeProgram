@@ -15,6 +15,7 @@ import com.dragonmaster10.musicAndLifeProgram.menu.IExecutable;
 public class UserViewMenuItem implements IExecutable
 {
 	 public	UserViewMenuItem(){}
+	 
 	 public	void execute()
 	 {
 		 //System.out.println("I ran: "	+ UserViewMenuItem.class.getName());

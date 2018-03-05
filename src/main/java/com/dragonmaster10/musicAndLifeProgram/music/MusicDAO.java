@@ -1,18 +1,17 @@
-package com.dragonmaster10.musicAndLifeProgram.playlist;
+package com.dragonmaster10.musicAndLifeProgram.music;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.dragonmaster10.musicAndLifeProgram.data.IDataManager;
-import com.dragonmaster10.musicAndLifeProgram.user.User;
-import com.dragonmaster10.musicAndLifeProgram.user.UserDAO;
 
 /**********************************************************
  * *
@@ -24,55 +23,57 @@ import com.dragonmaster10.musicAndLifeProgram.user.UserDAO;
  *
  ***************************************************/
 
-public class PlaylistDAO implements IPlaylistDAO {
+public class MusicDAO implements IMusicDAO {
 	//DATA
 	private IDataManager dataManager;
 		
 	//this is added to every class that needs to log with one change
 	//the getLogger() part should contain the name of the class its in
 	//so you know the messages that came from objects of this class
-	private final Logger LOG = LogManager.getLogger(PlaylistDAO.class);
+	private final Logger LOG = LogManager.getLogger(MusicDAO.class);
 		
 	//CONSTRUCTORS
-	public PlaylistDAO( IDataManager dataManager) 
+	public MusicDAO( IDataManager dataManager) 
 	{
 		this.dataManager = dataManager;
 	}
 		
 	//METHODS
-	public ArrayList< Playlist> getAllPlaylists()
+	public ArrayList<Music> getAllMusic()
 	{
-		ArrayList< Playlist> userPlaylist = new ArrayList< Playlist>();
+		ArrayList<Music> musicList = new ArrayList<Music>();
 			
 		//get JDBC connection to database
-		Connection connection = null;
-			
+		Connection connection = null;	
 		try
 		{
 			//get a database connection
 			connection = this.dataManager.getConnectionObject();
 			
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
+			statement.setQueryTimeout(30); //set timeout to 30 sec
 				
 			//run the query
-			ResultSet resultSet = statement.executeQuery("select * from user_playlist");
+			ResultSet resultSet = statement.executeQuery("select * from music");
 				
-			//iterate through the results create Playlist objects put in the ListArray
+			//iterate through the results create Music objects put in the ListArray
 			while(resultSet.next())
 			{
-				Playlist playlist = new  Playlist (resultSet.getInt("user_playlist_id"),
-													   resultSet.getInt("user_id"),
-										  			   resultSet.getString("theme"),
-										  			   resultSet.getString("playlist_description")
-							             			  );
-				//putting the playlist objects into the list but not using them yet
-				userPlaylist.add(playlist);
+				Music music = new Music( resultSet.getInt("music_id"),
+									  resultSet.getInt("user_playlist_id"),
+						              resultSet.getString("song_name"),
+						              resultSet.getString("song_description"),
+						              resultSet.getString("artist_name"),
+						              resultSet.getInt("year_published"),
+						              resultSet.getString("song_url_link")		              
+						             );
+				//putting the Music objects into the list but not using them yet
+				musicList.add(music);
 					
-				//print the results by using the toString() on Playlist
-				LOG.debug("UserPlaylist object : "+ playlist);
-				}
+				//print the results by using the toString() on Music
+				LOG.debug("Music object : "+ music.toString());
 			}
+		}
 		catch(SQLException e)
 		{
 			//if the error message is "out of memory",
@@ -90,37 +91,36 @@ public class PlaylistDAO implements IPlaylistDAO {
 			{
 				//connection close failed.
 				LOG.error(e.getMessage());
-
 			}
 		}
-		return userPlaylist;
+		return musicList;
 			
 	}//EOM
 		
-		public Playlist getUserPlaylist(int user_playlist_id)
+	public Music getMusic(int music_id)
 		{
 			throw new UnsupportedOperationException();
 		}
 		
-		public int addUserPlaylist(Playlist aUserPlaylist)
+		public int addMusic(Music aMusic)
 		{
 			throw new UnsupportedOperationException();
 		}
 		
-		public void updateUserPlaylist(Playlist aUserPlaylist)
+		public void updateMusic(Music aMusic)
 		{
 			throw new UnsupportedOperationException();
 		}
 		
-		public void deleteUserPlaylist( Playlist aUserPlaylist)
+		public void deleteMusic( Music aMusic)
 		{
 			throw new UnsupportedOperationException();
 		}
 		
-		public String printUserPlaylist( int user_playlist_id)
+		public String printMusic( int music_id)
 		{
 			throw new UnsupportedOperationException();
 		}
 
 
-}//EOC
+}

@@ -22,7 +22,7 @@ import com.dragonmaster10.musicAndLifeProgram.data.IDataManager;
  *
  ***************************************************/
 
-public class UserDAO 
+public class UserDAO implements IUserDAO
 {
 	//DATA
 	private IDataManager dataManager;
