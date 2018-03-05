@@ -35,7 +35,7 @@ public class UserConsoleListView
 		while (iterator.hasNext())
 		{
 			User aUser = (User)iterator.next();
-			aUser.display();
+			System.out.println("Name:	" + aUser.getUserName() + "		Mob:" + aUser.getUserPhone());
 		}
 	}
 

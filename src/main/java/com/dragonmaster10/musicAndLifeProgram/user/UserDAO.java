@@ -60,13 +60,10 @@ public class UserDAO
 			//iterate through the results create User objects put in the ListArray
 			while(resultSet.next())
 			{
-				User user = new User( resultSet.getInt("userId"),
-									  resultSet.getString("userName"),
-						              resultSet.getString("userEmail"),
-						              resultSet.getString("userRole"),
-						              resultSet.getString("userToken"),
-						              resultSet.getInt("userStatus"),
-						              resultSet.getString("userLastUpdate"));
+				User user = new User( resultSet.getInt("user_id"),
+									  resultSet.getString("name"),
+						              resultSet.getInt("phone")
+						             );
 				//putting the user objects into the list but not using them yet
 				userList.add(user);
 				
@@ -97,7 +94,7 @@ public class UserDAO
 		
 	}//EOM
 	
-	public User getUser(int userId)
+	public User getUser(int user_id)
 	{
 		throw new UnsupportedOperationException();
 	}
@@ -117,7 +114,7 @@ public class UserDAO
 		throw new UnsupportedOperationException();
 	}
 	
-	public String printUser( int userId)
+	public String printUser( int user_id)
 	{
 		throw new UnsupportedOperationException();
 	}

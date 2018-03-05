@@ -3,6 +3,8 @@ package com.dragonmaster10.musicAndLifeProgram.music;
 import java.util.Scanner;
 import com.dragonmaster10.musicAndLifeProgram.menu.ConsoleControls;
 import com.dragonmaster10.musicAndLifeProgram.menu.IExecutable;
+import com.dragonmaster10.musicAndLifeProgram.user.UserConsoleListView;
+import com.dragonmaster10.musicAndLifeProgram.user.UserDAO;
 
 /**********************************************************
  * *

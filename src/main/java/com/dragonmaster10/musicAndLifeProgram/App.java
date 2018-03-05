@@ -50,7 +50,7 @@ public class App
     	
     	//The URL and name of the SQLite database
    	    //should be of the form jdbc:sqlite:database/oreallyoreilly.db
-    	//private String databaseFile = "jdbc:sqlite:database/oreallyoreilly.db";
+    	//private String databaseFile = 13;
     	private String dbURL;
     	
     	//Constructors
@@ -82,7 +82,7 @@ public class App
     		MenuBuilder theMenu = new MenuBuilder();
     		
     		//theMenu.print();
-    		//LOG.debug(theMenu.display());
+    		//LOG.debug(theMenu.display()); 
     		
     		theMenu.getMenu().display();
     		
