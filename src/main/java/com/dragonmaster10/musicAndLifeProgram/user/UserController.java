@@ -1,6 +1,7 @@
 package com.dragonmaster10.musicAndLifeProgram.user;
 
 import java.util.Scanner;
+
 /**********************************************************
  * *
  * 

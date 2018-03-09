@@ -1,5 +1,6 @@
 package com.dragonmaster10.musicAndLifeProgram.user;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import com.dragonmaster10.musicAndLifeProgram.menu.ConsoleControls;
@@ -35,7 +36,7 @@ public class UserConsoleListView
 		while (iterator.hasNext())
 		{
 			User aUser = (User)iterator.next();
-			System.out.println("Name:	" + aUser.getUserName() + "		Mob:" + aUser.getUserPhone());
+			System.out.println("UserID: "+ aUser.getUserId() + "     Name: " + aUser.getUserName() + "     Mobile No: " + aUser.getUserPhone());
 		}
 	}
 

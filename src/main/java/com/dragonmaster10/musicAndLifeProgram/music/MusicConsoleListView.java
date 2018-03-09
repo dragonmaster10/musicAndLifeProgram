@@ -38,8 +38,10 @@ public class MusicConsoleListView
 		while (iterator.hasNext())
 		{
 			Music aMusic = (Music)iterator.next();
-			//System.out.println("Name:	" + aUser.getUserName() + "		Mob:" + aUser.getUserPhone());
-			System.out.println("Music ID: " + aMusic.getMusicId());
+	
+			System.out.println("Music ID: " + aMusic.getMusicId() + " 		UserPlaylistID: " +aMusic.getUserPlaylistId() + " 		Song Name: " +aMusic.getSongName()+
+					" 		Song Description:  " + aMusic.getSongDescription() + " 		Artist Name: " + aMusic.getArtistName() + " 		Year published: " +
+					aMusic.getYearPublished() + " 		URL Song online link: " +aMusic.getSongURLLink());
 		}
 	}
 

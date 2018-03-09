@@ -238,7 +238,7 @@ public class App
     	}// EOM
     	 	
     	/*
-    	* View the arguments presented at the commandline
+    	* View the arguments presented at the command line
     	* This is for debug and demo purposes
     	*/
     	private static void seeCommandlineInput( String args[])

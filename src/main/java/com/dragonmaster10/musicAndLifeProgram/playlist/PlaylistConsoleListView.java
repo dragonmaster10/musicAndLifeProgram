@@ -17,30 +17,31 @@ import com.dragonmaster10.musicAndLifeProgram.user.User;
 
 public class PlaylistConsoleListView {
 	
-		ArrayList<Playlist> userPlaylist;
+	ArrayList<Playlist> userPlaylist;
 
-		public PlaylistConsoleListView() {
-			// TODO Auto-generated constructor stub
-		}
-		
-		public void setUserPlaylist(ArrayList<Playlist> userPlaylist)
+	public PlaylistConsoleListView() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void setUserPlaylist(ArrayList<Playlist> userPlaylist)
+	{
+		this.userPlaylist = userPlaylist;
+	}
+	
+	public void display()
+	{
+		System.out.println( ConsoleControls.ANSI_YELLOW_BRIGHT + "...USER PLAYLIST VIEWER..." + ConsoleControls.ANSI_RESET);
+		System.out.println("\n");
+		Iterator<Playlist> iterator = this.userPlaylist.iterator();
+		while (iterator.hasNext())
 		{
-			this.userPlaylist = userPlaylist;
+			//this is where you choose what you want to see in your output
+			Playlist aUserPlaylist = (Playlist)iterator.next();
+			System.out.println("PlaylistID :"+ aUserPlaylist.getUserPlaylistId() + "		UserID: " +   aUserPlaylist.getUserId()+  
+					" 		Playlist theme: " +aUserPlaylist.getUserPlaylistTheme()+ " 		Playlist Description: " + aUserPlaylist.getUserPlaylistDescription());
 		}
-		
-		public void display()
-		{
-			System.out.println( ConsoleControls.ANSI_YELLOW_BRIGHT + "...USER PLAYLIST VIEWER..." + ConsoleControls.ANSI_RESET);
-			System.out.println("\n");
-			Iterator<Playlist> iterator = this.userPlaylist.iterator();
-			while (iterator.hasNext())
-			{
-				//this is where you choose what you want to see in your output
-				Playlist aUserPlaylist = (Playlist)iterator.next();
-				System.out.println("Playlist:"+ aUserPlaylist.getUserPlaylistId() +  "Playlist theme: " +aUserPlaylist.getUserPlaylistTheme());
-			}
 
-		}
+	}
 
 
 

@@ -44,7 +44,7 @@ public abstract class MenuWidget {
 		throw new UnsupportedOperationException();
 	}
 	
-	//is it a menu heading or a menuy item that can call a class
+	//is it a menu heading or a menu item that can call a class
 	public boolean isExecutable()
 	{
 		throw new UnsupportedOperationException();
